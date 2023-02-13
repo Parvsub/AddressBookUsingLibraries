@@ -27,50 +27,78 @@ public class AddressBook {
         ArrayList <String> contact = new ArrayList <String>();
 
         System.out.println("Enter the first name: ");
-        Scanner sc1 = new Scanner(System.in);
-        String first_name = sc1.next();
+        Scanner scanner1 = new Scanner(System.in);
+        String first_name = scanner1.next();
         contact.add(first_name);
 
         System.out.println("Enter the last name: ");
-        Scanner sc2 = new Scanner(System.in);
-        String last_name = sc2.next();
+        Scanner scanner2 = new Scanner(System.in);
+        String last_name = scanner2.next();
         contact.add(last_name);
 
         System.out.println("Enter the address: ");
-        Scanner sc3 = new Scanner(System.in);
-        String address = sc3.next();
+        Scanner scanner3 = new Scanner(System.in);
+        String address = scanner3.next();
         contact.add(address);
 
         System.out.println("Enter the city name: ");
-        Scanner sc4 = new Scanner(System.in);
-        String city = sc4.next();
+        Scanner scanner4 = new Scanner(System.in);
+        String city = scanner4.next();
         contact.add(city);
 
         System.out.println("Enter the state's name: ");
-        Scanner sc5 = new Scanner(System.in);
-        String state = sc5.next();
+        Scanner scanner5 = new Scanner(System.in);
+        String state = scanner5.next();
         contact.add(state);
 
         System.out.println("Enter the zip: ");
-        Scanner sc6 = new Scanner(System.in);
-        String zip = sc6.next();
+        Scanner scanner6 = new Scanner(System.in);
+        String zip = scanner6.next();
         contact.add(zip);
 
         System.out.println("Enter the phone number: ");
-        Scanner sc7 = new Scanner(System.in);
-        String phone_num = sc7.next();
+        Scanner scanner7 = new Scanner(System.in);
+        String phone_num = scanner7.next();
         contact.add(phone_num);
 
         System.out.println("Enter the email ID: ");
-        Scanner sc8 = new Scanner(System.in);
-        String email = sc8.next();
+        Scanner scanner8 = new Scanner(System.in);
+        String email = scanner8.next();
         contact.add(email);
 
         return contact;
+    }
+    public int searchExistingContact(String search_pers){
+        int index = -1;
+        int temp_index = -1;
+        for (ArrayList <String> i:AddressBook.address_book){
+            // find index of arraylist in which the given name is there
+            temp_index ++;
+            for (String j:i){
+                // if name is found
+                if (j.equals(search_pers)){
+                    index = temp_index;
+                    break;
+                }
+            }
+        }
+        return index;
+    }
+
+    public void editExistingContact(){
+        System.out.println("Enter the name of the person whose details you "
+                + "want to be changed");
+        Scanner scanner = new Scanner(System.in);
+        String search_pers = scanner.next();
+        int index = searchExistingContact(search_pers);
+        System.out.println("Found the name, Kindly enter new details ");
+        ArrayList <String> contact = enterContactDetails();
+        AddressBook.address_book.set(index, contact);
     }
     public static void main(String []args) {
         System.out.println("Welcome to Address Book Program!");
         AddressBook addressbook = new AddressBook();
         addressbook.enterContactDetails();
+        addressbook.editExistingContact();
     }
 }
