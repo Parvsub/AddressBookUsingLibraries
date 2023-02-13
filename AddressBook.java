@@ -58,12 +58,12 @@ public class AddressBook {
 
         System.out.println("Enter the phone number: ");
         Scanner scanner7 = new Scanner(System.in);
-        String phone_num = scanner7.next();
-        contact.add(phone_num);
+        String phoneNumber = scanner7.next();
+        contact.add(phoneNumber);
 
         System.out.println("Enter the email ID: ");
-        Scanner scanner8 = new Scanner(System.in);
-        String email = scanner8.next();
+        Scanner sc8 = new Scanner(System.in);
+        String email = sc8.next();
         contact.add(email);
 
         return contact;
@@ -84,21 +84,31 @@ public class AddressBook {
         }
         return index;
     }
-
     public void editExistingContact(){
         System.out.println("Enter the name of the person whose details you "
                 + "want to be changed");
-        Scanner scanner = new Scanner(System.in);
-        String search_pers = scanner.next();
+        Scanner sc = new Scanner(System.in);
+        String search_pers = sc.next();
         int index = searchExistingContact(search_pers);
         System.out.println("Found the name, Kindly enter new details ");
         ArrayList <String> contact = enterContactDetails();
         AddressBook.address_book.set(index, contact);
+    }
+    public void deleteExistingContact(){
+        System.out.println("Enter the name of the person whose details you "
+                + "want to be deleted");
+        Scanner scanner = new Scanner(System.in);
+        String search_pers = scanner.next();
+        // Fetch the index of person in address book
+        int index = searchExistingContact(search_pers);
+        // delete the details of person
+        AddressBook.address_book.remove(index);
     }
     public static void main(String []args) {
         System.out.println("Welcome to Address Book Program!");
         AddressBook addressbook = new AddressBook();
         addressbook.enterContactDetails();
         addressbook.editExistingContact();
+        addressbook.deleteExistingContact();
     }
 }
